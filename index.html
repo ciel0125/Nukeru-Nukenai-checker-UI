@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <!-- すぐにテーマを適用 -->
+  <script src="scripts/startup.js"></script>
+  <script src="scripts/settings.js"></script>
+
+  <title>抜ける・抜けないチェッカー | AI画像判定ツール</title>
+
+  <meta name="robots" content="index, follow">
+  <meta name="color-scheme" content="light dark">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" href="images/icon.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="images/android-chrome-192x192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="images/android-chrome-512x512.png">
+  <meta name="description"
+    content="画像をアップロードするとAIくんが&quot;腰が抜けるか抜けないか&quot;で判定してスコア化してくれます(ただし精度はガバガバです)。ドラッグ＆ドロップ、または「画像を選ぶ」ボタンで画像を読み込んでください。5MBを超えるファイルはアップロードできません。">
+
+  <link rel="stylesheet" href="style.css">
+
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+
+  <!-- フォント -->
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Kosugi+Maru&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <h1>
+    <a href="index.html"><img src="images/logo.png" alt="抜ける・抜けないチェッカー" class="logo-image"></a>
+    <div id="menuContainer" class="menuContainer">
+      <div class="menu" data-key="help">説明</div>
+      <div class="menu" data-key="history">更新履歴</div>
+      <div class="menu" data-key="settings">
+        <span class="material-symbols-outlined gear">settings</span>
+      </div>
+    </div>
+  </h1>
+  <div class="main-foot">
+    <div class="main-container">
+      <a href="index.html"><img src="images/logo.png" alt="抜ける・抜けないチェッカー" class="logo-sub"></a>
+      
+      <div class="descContainer">
+        <div class="descBox">
+          <span id="delete-button" class="close-button">×</span>
+          <div class="description">
+            画像をアップロードするとAIくんが<br>
+            <span style="font-weight: bold;">腰が抜けるか抜けないか</span>
+            で判定してくれます
+          </div>
+        </div>
+      </div>
+
+      <div class="dropContainer">
+        <div class="miniBtnContainer" style="visibility: hidden;"></div>
+        <input type="file" id="imageUpload" style="display: none;">
+        <div id="dropArea">
+          <div id="messageArea" class="message-hidden"></div>
+          <div id="dropAreaText">ここに画像をドロップ！<br>またはボタンで選択(5MBまで)</div>
+          <div id="dropOverlay"></div>
+          <div id="fileName"></div>
+        </div>
+        <div class="miniBtnContainer">
+          <label class="miniButtons trigger">
+            <span id="miniBtnTrigger" class="material-symbols-outlined trigger">keyboard_arrow_down</span>
+          </label>
+          <div id="showArea">
+            <label for="imageUpload" class="miniButtons miniImages">
+              <span class="material-symbols-outlined">imagesmode</span>
+            </label>
+            <label id="judgeButtonMini" class="miniButtons miniJudge">
+              <span class="material-symbols-outlined">gavel</span>
+            </label>
+          </div>
+        </div>
+      </div>
+      <div id="hideArea">
+        <!-- 画像アップロード＆ドロップ -->
+        <label for="imageUpload" class="buttons" style="margin-bottom: 5px;">
+          <span class="material-symbols-outlined">imagesmode</span>
+          画像を選ぶ
+        </label>
+        <!-- 実行ボタン -->
+        <label id="judgeButton" class="judgeButton">
+          <span class="material-symbols-outlined" style="font-size: 40px;">gavel</span>
+          判定する
+        </label>
+      </div>
+
+      <div id="resultContainer"></div>
+
+      <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+      <script
+        src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
+      </div>
+      <footer id="footer-year">Ⓒ2025 抜ける・抜けないチェッカー</footer>
+    </div>
+    
+    
+    <div id="menuOverlay" class="menu-overlay hidden">
+      <div class="menu-content">
+        <span id="close-button" class="close-button">×</span>
+        <div id="menuText"></div>
+        <div class="menu-nav">
+          <span id="prevMenu" class="menu-arrow">〈</span>
+          <span id="nextMenu" class="menu-arrow">〉</span>
+        </div>
+      </div>
+    </div>
+    <script src="scripts/main.js"></script>
+  </body>
+</html>
